@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Histórico - NG+ Supermercado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+        <h2>Histórico de Vendas</h2>
+        <a href="/admin" class="btn btn-dark">Voltar ao Estoque</a>
+    </div>
+
+    <table class="table table-hover bg-white shadow-sm align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID Venda</th>
+                <th>Data/Hora</th>
+                <th>Pagamento</th>
+                <th>Desconto</th>
+                <th>Total Pago</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for v in vendas %}
+            <tr>
+                <td class="fw-bold">#{{ v[0] }}</td>
+                <td>{{ v[1] }}</td>
+                <td>{{ v[4] }}</td>
+                <td class="text-danger">R$ {{ "%.2f"|format(v[3]) }}</td>
+                <td class="text-success fw-bold">R$ {{ "%.2f"|format(v[2]) }}</td>
+                <td>
+                    <a href="/admin/recibo/{{ v[0] }}" class="btn btn-primary btn-sm">Ver Recibo</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
